@@ -43,3 +43,22 @@ $('.scan-qrcode').on('click', function() {
         Materialize.toast('Erro: ' + error, 3000, 'red-text');
     });
 });
+
+$('.acao-finalizar').on('click', function() {
+    $.ajax({
+        url: 'http://cozinhapp.sergiolopes.org/novo-pedido',
+        data: {
+            mesa: $('#numero-mesa').val(),
+            pedido: $('#resumo').text(),
+        },
+        error: function(error) {
+            Materialize.toast(error.responseText, 3000, 'red-text');
+        },
+        success: function(data) {
+            Materialize.toast(data, 2000);
+
+            $('#numero-mesa').val();
+            $('.badge').remove();
+        }
+    });
+});
